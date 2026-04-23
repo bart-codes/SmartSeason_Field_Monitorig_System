@@ -16,6 +16,8 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/fields', fieldsRoutes);
+app.use('/api/dashboard', require('./routes/dashboard'));
+app.use('/api/agents', require('./routes/agents'));
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {

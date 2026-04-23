@@ -1,5 +1,42 @@
-export default function FieldDetailModal({ field, onClose }) {
+import { useState } from 'react';
+import { useAuth } from '../AuthContext';
+import { API_BASE, authHeaders, safeFetch } from '../api';
+
+export default function FieldDetailModal({ field, notes, onClose, onNoteAdded }) {
+  const { token, logout } = useAuth();
+  const [noteText, setNoteText] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+
   if (!field) return null;
+
+  const handleAddNote = async (event) => {
+    event.preventDefault();
+    if (!noteText.trim()) return;
+    setSaving(true);
+    setError('');
+
+    try {
+      await safeFetch(`${API_BASE}/fields/${field.id}/notes`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...authHeaders(token)
+        },
+        body: JSON.stringify({ content: noteText })
+      });
+      setNoteText('');
+      if (onNoteAdded) onNoteAdded();
+    } catch (err) {
+      if (err.status === 401) {
+        logout();
+        return;
+      }
+      setError(err.message);
+    } finally {
+      setSaving(false);
+    }
+  };
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -27,12 +64,32 @@ export default function FieldDetailModal({ field, onClose }) {
           </div>
           <div className="detail-row">
             <span>Assigned agent</span>
-            <strong>{field.assigned_agent}</strong>
+            <strong>{field.assigned_agent_name || 'Unassigned'}</strong>
           </div>
-          <div className="detail-row">
-            <span>Notes</span>
-            <p>{field.notes}</p>
-          </div>
+
+          <section className="notes-section">
+            <h4>Recent notes</h4>
+            {notes && notes.length > 0 ? (
+              <ul className="notes-list">
+                {notes.map((note) => (
+                  <li key={note.id}>{note.content}</li>
+                ))}
+              </ul>
+            ) : (
+              <p>No notes yet for this field.</p>
+            )}
+
+            <form className="notes-form" onSubmit={handleAddNote}>
+              <textarea
+                rows="3"
+                value={noteText}
+                onChange={(event) => setNoteText(event.target.value)}
+                placeholder="Add an observation note"
+              />
+              <button type="submit" disabled={saving}>{saving ? 'Saving…' : 'Add note'}</button>
+            </form>
+            {error && <div className="error-message">{error}</div>}
+          </section>
         </div>
       </div>
     </div>

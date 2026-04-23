@@ -13,6 +13,7 @@ export default function FieldsTable({ fields, onSelect }) {
               <th>Crop</th>
               <th>Planting</th>
               <th>Stage</th>
+              <th>Agent</th>
               <th>Status</th>
             </tr>
           </thead>
@@ -23,6 +24,7 @@ export default function FieldsTable({ fields, onSelect }) {
                 <td>{field.crop_type}</td>
                 <td>{field.planting_date}</td>
                 <td>{field.current_stage}</td>
+                <td>{field.assigned_agent_name || 'Unassigned'}</td>
                 <td><span className={`status-pill ${field.status.toLowerCase()}`}>{field.status}</span></td>
               </tr>
             ))}

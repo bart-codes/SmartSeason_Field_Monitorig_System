@@ -17,9 +17,12 @@ const enforceAccess = (field, user) => {
 
 router.get('/', async (req, res) => {
   try {
+    const baseQuery = `SELECT f.*, u.name AS assigned_agent_name
+      FROM fields f
+      LEFT JOIN users u ON f.assigned_agent_id = u.id`;
     const query = req.user.role === 'ADMIN'
-      ? 'SELECT * FROM fields'
-      : 'SELECT * FROM fields WHERE assigned_agent_id = ?';
+      ? baseQuery
+      : `${baseQuery} WHERE f.assigned_agent_id = ?`;
 
     const fields = req.user.role === 'ADMIN'
       ? await dbAll(query)
@@ -58,7 +61,13 @@ router.post('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const field = await dbGet('SELECT * FROM fields WHERE id = ?', [req.params.id]);
+    const field = await dbGet(
+      `SELECT f.*, u.name AS assigned_agent_name
+       FROM fields f
+       LEFT JOIN users u ON f.assigned_agent_id = u.id
+       WHERE f.id = ?`,
+      [req.params.id]
+    );
     if (!field) return res.status(404).json({ error: 'Field not found' });
     if (!enforceAccess(field, req.user)) return res.status(403).json({ error: 'Forbidden' });
     res.json(field);

@@ -1,5 +1,6 @@
-import { useMemo } from 'react';
-import { fields } from '../../data/mockData';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../AuthContext';
+import { API_BASE, authHeaders, safeFetch } from '../api';
 
 function statLabel(count, label) {
   return (
@@ -11,25 +12,49 @@ function statLabel(count, label) {
 }
 
 export default function Dashboard() {
-  const metrics = useMemo(() => {
-    const total = fields.length;
-    const active = fields.filter((field) => field.status === 'ACTIVE').length;
-    const atRisk = fields.filter((field) => field.status === 'AT_RISK').length;
-    const completed = fields.filter((field) => field.status === 'COMPLETED').length;
-    return { total, active, atRisk, completed };
-  }, []);
+  const { token, logout } = useAuth();
+  const [metrics, setMetrics] = useState({ total: 0, active: 0, atRisk: 0, completed: 0 });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchSummary = async () => {
+      setLoading(true);
+      try {
+        const data = await safeFetch(`${API_BASE}/dashboard/summary`, {
+          headers: authHeaders(token)
+        });
+        setMetrics(data);
+      } catch (err) {
+        if (err.status === 401) {
+          logout();
+          return;
+        }
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSummary();
+  }, [token, logout]);
 
   return (
     <div className="page-grid">
       <div className="card summary-card">
         <h2>Operations Overview</h2>
         <p>Track field progression, agent workload, and crop status from one place.</p>
-        <div className="metrics-row">
-          {statLabel(metrics.total, 'Total fields')}
-          {statLabel(metrics.active, 'Active fields')}
-          {statLabel(metrics.atRisk, 'At risk')}
-          {statLabel(metrics.completed, 'Completed')}
-        </div>
+        {loading ? (
+          <p>Loading summary…</p>
+        ) : (
+          <div className="metrics-row">
+            {statLabel(metrics.total, 'Total fields')}
+            {statLabel(metrics.active, 'Active fields')}
+            {statLabel(metrics.atRisk, 'At risk')}
+            {statLabel(metrics.completed, 'Completed')}
+          </div>
+        )}
+        {error && <div className="error-message">{error}</div>}
       </div>
 
       <div className="card insights-card">

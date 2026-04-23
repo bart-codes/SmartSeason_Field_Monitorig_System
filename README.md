@@ -95,7 +95,6 @@ This repository now uses the recommended stack:
 1. Clone the repository
 2. Open a terminal in the project root
 
-<<<<<<< HEAD
 ### Backend
 
 ```bash
@@ -116,12 +115,9 @@ npm run dev
 3. Open the frontend URL shown by Vite, typically `http://localhost:5173`
 4. Log in with the sample credentials
 
-> Note: The backend will run on port `4000` and the frontend will run on port `5173`.
+> Note: The backend runs on port `4000` and the frontend runs on port `5173`.
 
-## Demo Credentials (Example)
-=======
 ## Demo Credentials
->>>>>>> 1d2aa4fba7dd229cfc8039b3eb0ea79aa0ad6218
 
 - Admin: `admin@example.com` / `Password123!`
 - Agent: `agent@example.com` / `Agent123!`

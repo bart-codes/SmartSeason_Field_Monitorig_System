@@ -355,3 +355,104 @@ th {
     grid-template-columns: 1fr;
   }
 }
+
+.login-shell,
+.loading-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.login-card {
+  max-width: 420px;
+}
+
+.login-card label {
+  display: block;
+  margin-bottom: 14px;
+  color: #475569;
+}
+
+.login-card input,
+.notes-form textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+}
+
+.notes-section {
+  margin-top: 24px;
+}
+
+.notes-section h4 {
+  margin: 0 0 14px;
+}
+
+.notes-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notes-list li {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+
+.notes-form {
+  margin-top: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.secondary-button {
+  background: #e2e8f0;
+  color: #1f2937;
+}
+
+.sidebar-footer {
+  margin-top: 36px;
+  padding-top: 18px;
+  border-top: 1px solid #eff6ff;
+}
+
+.profile-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.profile-avatar {
+  display: inline-flex;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+}
+
+.profile-name {
+  margin: 0;
+  font-weight: 700;
+}
+
+.profile-role {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.88rem;
+}
+
+textarea {
+  resize: vertical;
+}
