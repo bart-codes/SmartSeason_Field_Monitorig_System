@@ -93,9 +93,7 @@ A clean implementation could use:
 5. Start backend and frontend servers
 6. Open the application in the browser
 
-> Note: This repository currently contains the README plan. The codebase should be added in the project repository following this design.
-
-## Demo Credentials (Example)
+## Demo Credentials
 
 - Admin: `admin@example.com` / `Password123!`
 - Agent: `agent@example.com` / `Agent123!`
