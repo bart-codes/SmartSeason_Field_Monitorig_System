@@ -75,25 +75,47 @@ The API should be RESTful and role-aware.
 **Dashboard**
 - `GET /api/dashboard/summary` — return aggregated metrics and counts based on role
 
-## Suggested Architecture
+## Chosen Stack
 
-A clean implementation could use:
+This repository now uses the recommended stack:
 
-- Backend: Node.js + Express, Django, or Laravel
-- Frontend: React, Vue, or plain HTML/CSS/JS
-- Database: PostgreSQL or MySQL
-- Authentication: JWT or session-based auth
+- Backend: Node.js + Express
+- Frontend: React + Vite
+- Database: SQLite
+- Authentication: JWT
+
+## Project Layout
+
+- `backend/` — Express API, SQLite database, authentication, field management routes
+- `frontend/` — React app built with Vite for a fast development experience
+- `.env.example` — example environment variables
 
 ## Setup Instructions
 
 1. Clone the repository
-2. Install backend dependencies
-3. Configure database credentials
-4. Run database migrations
-5. Start backend and frontend servers
-6. Open the application in the browser
+2. Open a terminal in the project root
 
-> Note: This repository currently contains the README plan. The codebase should be added in the project repository following this design.
+### Backend
+
+```bash
+cd backend
+npm install
+cp ../.env.example .env
+npm start
+```
+
+### Frontend
+
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+
+3. Open the frontend URL shown by Vite, typically `http://localhost:5173`
+4. Log in with the sample credentials
+
+> Note: The backend will run on port `4000` and the frontend will run on port `5173`.
 
 ## Demo Credentials (Example)
 
