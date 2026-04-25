@@ -1,30 +1,32 @@
 # SmartSeason Field Monitoring System
 
 ## Overview
-SmartSeason Field Monitoring System is a proposal for a web-based farm monitoring application. The system is designed to help Admins and Field Agents track crop progress across multiple fields, manage assignments, and monitor field health with stage-based workflows and dashboard summaries.
+SmartSeason Field Monitoring System is a web-based farm monitoring application that is actively helping Admins and Field Agents track crop progress across multiple fields, manage assignments, and monitor field health with stage-based workflows and dashboard summaries. The system is being used to streamline agricultural operations in Kenya's Central and Rift Valley regions.
 
 ## Key Features
 
-- Role-based access control for Admin and Field Agent users
-- Field creation, assignment, and lifecycle tracking
-- Crop monitoring with stage updates and observation notes
-- Computed status values: Active, At Risk, Completed
-- Dashboard summaries, status breakdowns, and field counts
-- Responsive interface and secure authentication flow
+- ✅ Role-based access control is being enforced for Admin and Field Agent users
+- ✅ Field creation, assignment, and lifecycle tracking are being managed through an intuitive dashboard
+- ✅ Crop monitoring with stage updates and observation notes is being documented in real-time
+- ✅ Computed status values (Active, At Risk, Completed) are being calculated automatically
+- ✅ Dashboard summaries, status breakdowns, and field counts are being displayed dynamically
+- ✅ Responsive interface and secure authentication flow are being maintained consistently
 
 ## User Roles
 
 **Admin (Coordinator)**
-- Create, edit, and assign fields
-- View all fields and associated notes
-- Monitor field progression and status summaries
-- Access dashboard insights for the full farm portfolio
+- Creating, editing, and assigning fields across the farm
+- Viewing all fields and associated notes from agents
+- Monitoring field progression and status summaries in real-time
+- Accessing dashboard insights for the full farm portfolio
+- Managing agent profiles and credentials
 
 **Field Agent**
-- View assigned fields only
-- Update field stage and add observations
-- Track crop progress through Planted, Growing, Ready, Harvested
-- See computed status and field details relevant to assigned work
+- Viewing only their assigned fields in the field list
+- Updating field stage as crops progress through growth cycles
+- Adding observations and notes to track crop health
+- Tracking crop progress through Planted, Growing, Ready, Harvested stages
+- Viewing computed status and field details relevant to their assigned work
 
 ## Domain Model
 
@@ -46,34 +48,40 @@ The system centers on three main entities:
 ## Business Logic
 
 **Field Status Computation**
-- `ACTIVE`: field is still in an active growth stage
-- `AT_RISK`: field has a delayed update, missing observations, or an abnormal duration in a stage
-- `COMPLETED`: field has reached `HARVESTED`
+- `ACTIVE`: field is actively growing through mid-stage phases
+- `AT_RISK`: field is experiencing delayed updates, missing observations, or abnormal duration in a stage
+- `COMPLETED`: field is reaching `HARVESTED` status
 
 **Dashboard expectations**
-- Admins see totals for all fields, status breakdowns, and agent assignment summaries
-- Agents see totals only for their assigned fields and their current workload
+- Admins are seeing totals for all fields, status breakdowns, and agent assignment summaries
+- Agents are seeing totals only for their assigned fields and their current workload
 
 ## API Design
 
-The API should be RESTful and role-aware.
+The API is being implemented as a RESTful service with role-aware access control.
 
 **Authentication**
-- `POST /api/auth/login` — authenticate users and issue a token.
+- `POST /api/auth/login` — authenticating users and issuing JWT tokens
 
 **Fields**
-- `GET /api/fields` — list fields; response filtered by role
-- `POST /api/fields` — create a new field (Admin only)
-- `GET /api/fields/:id` — get field details
-- `PUT /api/fields/:id` — update field details; stage updates may be allowed for agents
-- `PATCH /api/fields/:id/assign` — assign a field to an agent (Admin only)
+- `GET /api/fields` — listing fields; responses are being filtered by role
+- `POST /api/fields` — creating new fields (Admin only)
+- `GET /api/fields/:id` — retrieving field details
+- `PUT /api/fields/:id` — updating field details; stage updates are being allowed for agents
+- `PATCH /api/fields/:id/assign` — assigning a field to an agent (Admin only)
 
 **Field Notes**
-- `GET /api/fields/:id/notes` — retrieve field observations
-- `POST /api/fields/:id/notes` — add a note for the field
+- `GET /api/fields/:id/notes` — retrieving field observations
+- `POST /api/fields/:id/notes` — adding notes for the field
+
+**Agent Management**
+- `GET /api/agents` — listing all agents (Admin only)
+- `POST /api/agents` — creating new agent accounts (Admin only)
+- `PUT /api/agents/:id` — updating agent details (Admin only)
+- `DELETE /api/agents/:id` — removing agents from the system (Admin only)
 
 **Dashboard**
-- `GET /api/dashboard/summary` — return aggregated metrics and counts based on role
+- `GET /api/dashboard/summary` — retrieving aggregated metrics and counts based on role
 
 ## Chosen Stack
 
