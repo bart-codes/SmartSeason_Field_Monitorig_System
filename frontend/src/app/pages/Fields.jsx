@@ -152,7 +152,9 @@ export default function Fields() {
             <h2>Field Management</h2>
             <p>Review field status and drill into individual plots for details.</p>
           </div>
-          <button className="primary-button" onClick={handleOpenAddForm}>Add new field</button>
+          {user?.role === 'ADMIN' && (
+            <button className="primary-button" onClick={handleOpenAddForm}>Add new field</button>
+          )}
         </div>
 
         {loading ? (

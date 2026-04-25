@@ -1,49 +1,49 @@
 export const fields = [
   {
     id: 1,
-    name: 'North Orchard',
-    crop_type: 'Corn',
+    name: 'Kigumo Heights',
+    crop_type: 'Maize',
     planting_date: '2026-03-12',
     current_stage: 'GROWING',
     status: 'ACTIVE',
-    assigned_agent: 'Jasmine Park',
-    notes: 'Irrigation schedule is stable and growth looks healthy.'
+    assigned_agent: 'Wanjiru Muthoni',
+    notes: 'Crop growing well with good soil moisture. Central region performing excellently.'
   },
   {
     id: 2,
-    name: 'East Pasture',
-    crop_type: 'Soybean',
+    name: 'Nakuru Spring',
+    crop_type: 'Wheat',
     planting_date: '2026-02-28',
     current_stage: 'READY',
     status: 'AT_RISK',
-    assigned_agent: 'Samuel Reed',
-    notes: 'Crop appears ready, but weather risk is elevated for the next week.'
+    assigned_agent: 'Kipchoge Koech',
+    notes: 'Wheat crop ready but Rift Valley weather conditions unpredictable next week.'
   },
   {
     id: 3,
-    name: 'South Field',
-    crop_type: 'Wheat',
+    name: 'Murang\'a River Bottom',
+    crop_type: 'Potatoes',
     planting_date: '2026-03-20',
     current_stage: 'PLANTED',
     status: 'ACTIVE',
-    assigned_agent: 'Mia Johnson',
-    notes: 'New planting phase completed successfully.'
+    assigned_agent: 'Njeri Kamau',
+    notes: 'Potato planting phase completed successfully in fertile valley soil.'
   },
   {
     id: 4,
-    name: 'West Grove',
+    name: 'Eldoret Green Valley',
     crop_type: 'Barley',
     planting_date: '2026-01-15',
     current_stage: 'HARVESTED',
     status: 'COMPLETED',
-    assigned_agent: 'Daniel Cruz',
-    notes: 'Harvest completed with strong yield.'
+    assigned_agent: 'Chemutai Kiplagat',
+    notes: 'Barley harvest completed with strong yield in Rift Valley region.'
   }
 ];
 
 export const agents = [
-  { id: 1, name: 'Jasmine Park', email: 'jasmine@example.com', role: 'AGENT' },
-  { id: 2, name: 'Samuel Reed', email: 'samuel@example.com', role: 'AGENT' },
-  { id: 3, name: 'Mia Johnson', email: 'mia@example.com', role: 'AGENT' },
-  { id: 4, name: 'Daniel Cruz', email: 'daniel@example.com', role: 'AGENT' }
+  { id: 1, name: 'Wanjiru Muthoni', email: 'wanjiru@example.com', role: 'AGENT' },
+  { id: 2, name: 'Kipchoge Koech', email: 'kipchoge@example.com', role: 'AGENT' },
+  { id: 3, name: 'Njeri Kamau', email: 'njeri@example.com', role: 'AGENT' },
+  { id: 4, name: 'Chemutai Kiplagat', email: 'chemutai@example.com', role: 'AGENT' }
 ];

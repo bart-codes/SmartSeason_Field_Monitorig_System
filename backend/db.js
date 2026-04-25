@@ -83,59 +83,59 @@ const initDatabase = async () => {
 
     await dbRun(
       'INSERT INTO users (name, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?)',
-      ['Jasmine Park', 'jasmine@example.com', passwordAgent, 'AGENT', new Date().toISOString()]
+      ['Wanjiru Muthoni', 'wanjiru@example.com', passwordAgent, 'AGENT', new Date().toISOString()]
     );
 
     await dbRun(
       'INSERT INTO users (name, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?)',
-      ['Samuel Reed', 'samuel@example.com', passwordAgent, 'AGENT', new Date().toISOString()]
+      ['Kipchoge Koech', 'kipchoge@example.com', passwordAgent, 'AGENT', new Date().toISOString()]
     );
 
     await dbRun(
       'INSERT INTO users (name, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?)',
-      ['Mia Johnson', 'mia@example.com', passwordAgent, 'AGENT', new Date().toISOString()]
+      ['Njeri Kamau', 'njeri@example.com', passwordAgent, 'AGENT', new Date().toISOString()]
     );
 
     await dbRun(
       'INSERT INTO users (name, email, password_hash, role, created_at) VALUES (?, ?, ?, ?, ?)',
-      ['Daniel Cruz', 'daniel@example.com', passwordAgent, 'AGENT', new Date().toISOString()]
+      ['Chemutai Kiplagat', 'chemutai@example.com', passwordAgent, 'AGENT', new Date().toISOString()]
     );
   }
 
   const fieldCount = await dbGet('SELECT COUNT(*) AS count FROM fields');
   if (!fieldCount || fieldCount.count === 0) {
-    const jasmine = await dbGet('SELECT id FROM users WHERE email = ?', ['jasmine@example.com']);
-    const samuel = await dbGet('SELECT id FROM users WHERE email = ?', ['samuel@example.com']);
-    const mia = await dbGet('SELECT id FROM users WHERE email = ?', ['mia@example.com']);
-    const daniel = await dbGet('SELECT id FROM users WHERE email = ?', ['daniel@example.com']);
+    const wanjiru = await dbGet('SELECT id FROM users WHERE email = ?', ['wanjiru@example.com']);
+    const kipchoge = await dbGet('SELECT id FROM users WHERE email = ?', ['kipchoge@example.com']);
+    const njeri = await dbGet('SELECT id FROM users WHERE email = ?', ['njeri@example.com']);
+    const chemutai = await dbGet('SELECT id FROM users WHERE email = ?', ['chemutai@example.com']);
 
     const now = new Date().toISOString();
     await dbRun(
       'INSERT INTO fields (name, crop_type, planting_date, current_stage, status, assigned_agent_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      ['North Orchard', 'Corn', '2026-03-12', 'GROWING', 'ACTIVE', jasmine.id, now, now]
+      ['Kigumo Heights', 'Maize', '2026-03-12', 'GROWING', 'ACTIVE', wanjiru.id, now, now]
     );
     await dbRun(
       'INSERT INTO fields (name, crop_type, planting_date, current_stage, status, assigned_agent_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      ['East Pasture', 'Soybean', '2026-02-28', 'READY', 'AT_RISK', samuel.id, now, now]
+      ['Nakuru Spring', 'Wheat', '2026-02-28', 'READY', 'AT_RISK', kipchoge.id, now, now]
     );
     await dbRun(
       'INSERT INTO fields (name, crop_type, planting_date, current_stage, status, assigned_agent_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      ['South Field', 'Wheat', '2026-03-20', 'PLANTED', 'ACTIVE', mia.id, now, now]
+      ['Murang\'a River Bottom', 'Potatoes', '2026-03-20', 'PLANTED', 'ACTIVE', njeri.id, now, now]
     );
     await dbRun(
       'INSERT INTO fields (name, crop_type, planting_date, current_stage, status, assigned_agent_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      ['West Grove', 'Barley', '2026-01-15', 'HARVESTED', 'COMPLETED', daniel.id, now, now]
+      ['Eldoret Green Valley', 'Barley', '2026-01-15', 'HARVESTED', 'COMPLETED', chemutai.id, now, now]
     );
 
-    const north = await dbGet('SELECT id FROM fields WHERE name = ?', ['North Orchard']);
-    const east = await dbGet('SELECT id FROM fields WHERE name = ?', ['East Pasture']);
-    const south = await dbGet('SELECT id FROM fields WHERE name = ?', ['South Field']);
-    const west = await dbGet('SELECT id FROM fields WHERE name = ?', ['West Grove']);
+    const kigumo = await dbGet('SELECT id FROM fields WHERE name = ?', ['Kigumo Heights']);
+    const nakuru = await dbGet('SELECT id FROM fields WHERE name = ?', ['Nakuru Spring']);
+    const murangaRiver = await dbGet('SELECT id FROM fields WHERE name = ?', ['Murang\'a River Bottom']);
+    const eldoret = await dbGet('SELECT id FROM fields WHERE name = ?', ['Eldoret Green Valley']);
 
-    await dbRun('INSERT INTO notes (field_id, author_id, content, created_at) VALUES (?, ?, ?, ?)', [north.id, jasmine.id, 'Irrigation schedule is stable and growth looks healthy.', now]);
-    await dbRun('INSERT INTO notes (field_id, author_id, content, created_at) VALUES (?, ?, ?, ?)', [east.id, samuel.id, 'Crop appears ready, but weather risk is elevated for the next week.', now]);
-    await dbRun('INSERT INTO notes (field_id, author_id, content, created_at) VALUES (?, ?, ?, ?)', [south.id, mia.id, 'New planting phase completed successfully.', now]);
-    await dbRun('INSERT INTO notes (field_id, author_id, content, created_at) VALUES (?, ?, ?, ?)', [west.id, daniel.id, 'Harvest completed with strong yield.', now]);
+    await dbRun('INSERT INTO notes (field_id, author_id, content, created_at) VALUES (?, ?, ?, ?)', [kigumo.id, wanjiru.id, 'Crop growing well with good soil moisture. Central region performing excellently.', now]);
+    await dbRun('INSERT INTO notes (field_id, author_id, content, created_at) VALUES (?, ?, ?, ?)', [nakuru.id, kipchoge.id, 'Wheat crop ready but Rift Valley weather conditions unpredictable next week.', now]);
+    await dbRun('INSERT INTO notes (field_id, author_id, content, created_at) VALUES (?, ?, ?, ?)', [murangaRiver.id, njeri.id, 'Potato planting phase completed successfully in fertile valley soil.', now]);
+    await dbRun('INSERT INTO notes (field_id, author_id, content, created_at) VALUES (?, ?, ?, ?)', [eldoret.id, chemutai.id, 'Barley harvest completed with strong yield in Rift Valley region.', now]);
   }
 };
 
