@@ -51,6 +51,21 @@ export default function Fields() {
     loadNotes(field.id);
   };
 
+  const handleFieldUpdated = async () => {
+    await loadFields();
+    // Refresh the modal with updated data
+    if (selectedField) {
+      try {
+        const updated = await safeFetch(`${API_BASE}/fields/${selectedField.id}`, {
+          headers: authHeaders(token)
+        });
+        setSelectedField(updated);
+      } catch (err) {
+        console.error('Failed to refresh field:', err);
+      }
+    }
+  };
+
   return (
     <div className="page-grid">
       <div className="card">
@@ -71,7 +86,7 @@ export default function Fields() {
         {error && <div className="error-message">{error}</div>}
       </div>
 
-      <FieldDetailModal field={selectedField} notes={notes} onClose={() => setSelectedField(null)} onNoteAdded={() => selectedField && loadNotes(selectedField.id)} />
+      <FieldDetailModal field={selectedField} notes={notes} onClose={() => setSelectedField(null)} onNoteAdded={() => selectedField && loadNotes(selectedField.id)} onFieldUpdated={handleFieldUpdated} />
     </div>
   );
 }
