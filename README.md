@@ -127,18 +127,70 @@ npm run dev
 
 ## Demo Credentials
 
-- Admin: `admin@example.com` / `Password123!`
-- Agent: `agent@example.com` / `Agent123!`
+**Admin Account:**
+- Email: `admin@example.com`
+- Password: `Password123!`
+
+**Agent Accounts (Central & Rift Valley Regions):**
+- **Wanjiru Muthoni** (Kigumo Heights, Maize): `wanjiru@example.com` / `Agent123!`
+- **Kipchoge Koech** (Nakuru Spring, Wheat): `kipchoge@example.com` / `Agent123!`
+- **Njeri Kamau** (Murang'a River Bottom, Potatoes): `njeri@example.com` / `Agent123!`
+- **Chemutai Kiplagat** (Eldoret Green Valley, Barley): `chemutai@example.com` / `Agent123!`
 
 ## Assumptions
 
-- Authentication is required for both Admin and Agent
-- Agents only access fields explicitly assigned to them
-- Field lifecycle follows fixed stages and status is computed automatically
-- Dashboard metrics are filtered by user role
-- Minimal viable product is prioritized over extra features
+- Authentication is being required for both Admin and Agent users
+- Agents are only accessing fields explicitly assigned to them
+- Field lifecycle is following fixed stages and status is being computed automatically
+- Dashboard metrics are being filtered by user role to ensure data security
+- The system is prioritizing a minimal viable product for core functionality
+- Kenyan local names and regions are being used for all field and agent data
 
-## Submission Notes
+## Screenshots & System Flow
 
-This README documents the project intent, data model, API design, and implementation plan for the SmartSeason Field Monitoring System. The final repository should include code, setup scripts, and deployment or run instructions.
+### 1. Login Page
+Users are logging in with their email and password. The backend determines their role from their credentials.
+
+### 2. Admin Dashboard
+Admins are viewing the operations overview with metrics for all fields:
+- Total fields count
+- Active fields count
+- At-risk fields alert
+- Completed fields count
+
+The field overview table displays all fields with columns: Field Name, Crop Type, Stage, Status (color-coded badges), Assigned Agent, and Planted Date.
+
+### 3. Agent Dashboard
+Agents are viewing a filtered view showing only their assigned fields and workload metrics relevant to their assignments.
+
+### 4. Field Details Modal
+Agents and Admins are opening field details by clicking a field row. The modal displays:
+- Field information (name, crop type, stage, status)
+- Edit button (visible only to agents viewing their fields and admins)
+- Notes section showing all observations
+- Add note functionality for real-time updates
+
+### 5. Agent Management (Admin Only)
+Admins are managing agent profiles by:
+- Clicking the "Agents" navigation link
+- Viewing all agents in a directory
+- Clicking "+ Add Agent" button to create new agent accounts
+- Editing agent name, email, and password
+- Deleting agents from the system
+
+### 6. Create New Field (Admin Only)
+Admins are creating new fields by:
+- Going to the Fields page
+- Clicking "+ Add new field" button (visible only to admins)
+- Filling in: Field Name, Crop Type, Planting Date, Current Stage
+- Optionally assigning the field to an agent
+- Clicking "Create Field" - the new field appears in the table
+
+### 7. Edit Field
+Agents and Admins are editing field details:
+- Opening a field modal
+- Clicking "Edit" button
+- Updating stage, crop type, or planting date
+- Clicking "Save Changes" to persist updates
+- The field table refreshes automatically
 
