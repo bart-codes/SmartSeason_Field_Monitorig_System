@@ -194,3 +194,16 @@ Agents and Admins are editing field details:
 - Clicking "Save Changes" to persist updates
 - The field table refreshes automatically
 
+## Visual Documentation
+
+For detailed screenshots of each feature, view the [screenshots directory](./screenshots/) which includes:
+
+- **Login Page** - Authentication interface
+- **Admin Dashboard** - Operations overview with metrics and field table
+- **Fields Page** - Field management with add field button
+- **Add Field Modal** - Form for creating new fields
+- **Agent Directory** - Agent management interface with add/edit/delete controls
+- **Field Detail Modal** - Field information, edit capability, and notes section
+
+Each screenshot is documented with feature descriptions and user role access levels.
+
